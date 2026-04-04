@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME, modid = MekanismTurrets.MOD_ID, value = Dist.DEDICATED_SERVER)
+@EventBusSubscriber(modid = MekanismTurrets.MOD_ID, value = Dist.DEDICATED_SERVER)
 public final class Scheduler {
 
     static final ConcurrentMap<Integer, List<Runnable>> SERVER_SCHEDULE = new ConcurrentHashMap<>();
