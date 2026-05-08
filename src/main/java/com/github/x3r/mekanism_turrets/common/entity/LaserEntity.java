@@ -3,7 +3,7 @@ package com.github.x3r.mekanism_turrets.common.entity;
 import com.github.x3r.mekanism_turrets.common.block.LaserTurretBlock;
 import com.github.x3r.mekanism_turrets.common.registry.DamageTypeRegistry;
 import com.github.x3r.mekanism_turrets.common.registry.EntityRegistry;
-import net.minecraft.core.SectionPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -11,7 +11,6 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -36,10 +35,14 @@ public class LaserEntity extends Projectile {
     public void tick() {
         super.tick();
         if(!level().isClientSide()) {
-            if (lifeTime++ > 10 * 20) {
+            if(!movingToLoadedChunk()) {
                 this.discard();
                 return;
             }
+//            if (lifeTime++ > 10 * 20) {
+//                this.discard();
+//                return;
+//            }
             if(this.position().y > level().getMaxBuildHeight()+100) {
                 this.discard();
                 return;
@@ -54,6 +57,11 @@ public class LaserEntity extends Projectile {
 
         }
         this.setPos(this.position().add(this.getDeltaMovement()));
+    }
+
+    private boolean movingToLoadedChunk() {
+        Vec3 nextPos = this.position().add(this.getDeltaMovement());
+        return ((ServerLevel) level()).isPositionEntityTicking(BlockPos.containing(nextPos));
     }
 
     @Override
@@ -83,10 +91,16 @@ public class LaserEntity extends Projectile {
     @SubscribeEvent
     public static void enterChunk(EntityEvent.EnteringSection event) {
         if(!event.getEntity().level().isClientSide() && event.didChunkChange() && event.getEntity() instanceof LaserEntity) {
-            ServerLevel level = ((ServerLevel) event.getEntity().level());
-            if (!level.isPositionEntityTicking(SectionPos.of(event.getPackedNewPos()).center())) {
-                event.getEntity().discard();
-            }
+//            ServerLevel level = ((ServerLevel) event.getEntity().level());
+//
+//            if (!level.areEntitiesLoaded(event.getNewPos().chunk().toLong())) {
+//                event.getEntity().discard();
+//            }
         }
+    }
+
+    @Override
+    public boolean shouldRenderAtSqrDistance(double pDistance) {
+        return pDistance < 64*64;
     }
 }
