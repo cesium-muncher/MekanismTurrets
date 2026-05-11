@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "mixins.mekanism_turrets.refmap.json",
   "mixins": [
+    "EntityMixin"
   ],
   "client": [
   ],

@@ -13,8 +13,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class LaserEntity extends Projectile {
 
@@ -73,6 +71,7 @@ public class LaserEntity extends Projectile {
         }
     }
 
+
     @Override
     protected void defineSynchedData() {
 
@@ -83,24 +82,17 @@ public class LaserEntity extends Projectile {
         return false;
     }
 
+
     @Override
     public int getPortalWaitTime() {
         return Integer.MAX_VALUE;
     }
 
-    @SubscribeEvent
-    public static void enterChunk(EntityEvent.EnteringSection event) {
-        if(!event.getEntity().level().isClientSide() && event.didChunkChange() && event.getEntity() instanceof LaserEntity) {
-//            ServerLevel level = ((ServerLevel) event.getEntity().level());
-//
-//            if (!level.areEntitiesLoaded(event.getNewPos().chunk().toLong())) {
-//                event.getEntity().discard();
-//            }
-        }
-    }
 
     @Override
     public boolean shouldRenderAtSqrDistance(double pDistance) {
         return pDistance < 64*64;
     }
+
+
 }

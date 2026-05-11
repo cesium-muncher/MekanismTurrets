@@ -7,6 +7,8 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="${mod_authors}"
 description='''${mod_description}'''
+[[mixins]]
+config="mixins.mekanism_turrets.json"
 [[dependencies.${mod_id}]]
    modId="forge"
    mandatory=true
