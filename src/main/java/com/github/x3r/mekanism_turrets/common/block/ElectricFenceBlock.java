@@ -49,7 +49,7 @@ public class ElectricFenceBlock extends IronBarsBlock implements IHasTileEntity<
             int total = energyStorage.getEnergyStored();
             if(total > 0 && pEntity instanceof LivingEntity && pEntity.isAlive()) {
                 float ratio = (float) energyStorage.getEnergyStored() / energyStorage.getMaxEnergyStored();
-                boolean b = pEntity.hurt(new DamageTypeRegistry(pLevel.registryAccess()).electricFence(), ratio * 10.0F);
+                boolean b = pEntity.hurt(DamageTypeRegistry.electricFence(pLevel.registryAccess(), pPos.getCenter()), ratio * 10.0F);
                 if(b) {
                     energyStorage.extractEnergy((int) (energyStorage.getEnergyStored() * 0.1F), false);
                 }

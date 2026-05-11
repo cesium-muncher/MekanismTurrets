@@ -53,28 +53,15 @@ public class LaserEntity extends Projectile {
                 this.discard();
                 return;
             }
+            level().getEntities(this, getBoundingBox().inflate(0.5)).forEach(entity -> {
+                entity.hurt(DamageTypeRegistry.laser(registryAccess(), this), (float) this.damage);
+            });
             HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
             if(hitResult.getType().equals(HitResult.Type.BLOCK)) {
                 onHitBlock((BlockHitResult) hitResult);
             }
-            if(!this.isRemoved()) { // may be removed by onHitBlock
-                level().getEntities(this, getBoundingBox().inflate(0.5)).forEach(entity -> {
-                    entity.hurt(new DamageTypeRegistry(level().registryAccess()).laser(), (float) this.damage);
-                });
-            }
-//            if(hitResult.getType().equals(HitResult.Type.ENTITY)) {
-//                ((EntityHitResult) hitResult).getEntity().hurt(new DamageTypeRegistry(level().registryAccess()).laser(), (float) this.damage);
-//            }
         }
         this.setPos(this.position().add(this.getDeltaMovement()));
-    }
-
-    @Override
-    protected void onHitEntity(EntityHitResult pResult) {
-        super.onHitEntity(pResult);
-        if(!level().isClientSide()) {
-            pResult.getEntity().hurt(new DamageTypeRegistry(level().registryAccess()).laser(), (float) this.damage);
-        }
     }
 
     @Override
@@ -89,15 +76,5 @@ public class LaserEntity extends Projectile {
     @Override
     public boolean canUsePortal(boolean allowPassengers) {
         return false;
-    }
-
-    @SubscribeEvent
-    public static void enterChunk(EntityEvent.EnteringSection event) {
-        if(!event.getEntity().level().isClientSide() && event.didChunkChange() && event.getEntity() instanceof LaserEntity) {
-            ServerLevel level = ((ServerLevel) event.getEntity().level());
-            if(!level.isPositionEntityTicking(SectionPos.of(event.getPackedNewPos()).center())) {
-                event.getEntity().discard();
-            }
-        }
     }
 }

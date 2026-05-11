@@ -47,8 +47,6 @@ public class MekanismTurrets {
         modEventBus.addListener(this::loadConfig);
         modEventBus.addListener(MekanismTurretsPacketHandler::registerPayloadHandler);
 
-        neoEventBus.addListener(LaserEntity::enterChunk);
-
         registerDataTickets();
     }
 
