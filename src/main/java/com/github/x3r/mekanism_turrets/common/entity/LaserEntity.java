@@ -37,21 +37,22 @@ public class LaserEntity extends Projectile {
                 this.discard();
                 return;
             }
-//            if (lifeTime++ > 10 * 20) {
-//                this.discard();
-//                return;
-//            }
+            if (lifeTime++ > 10 * 20) {
+                this.discard();
+                return;
+            }
             if(this.position().y > level().getMaxBuildHeight()+100) {
                 this.discard();
                 return;
             }
+            level().getEntities(this, getBoundingBox().inflate(0.5)).forEach(entity -> {
+                entity.hurt(new DamageTypeRegistry(level().registryAccess()).laser(), (float) this.damage);
+            });
             HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
             if(hitResult.getType().equals(HitResult.Type.BLOCK)) {
                 onHitBlock((BlockHitResult) hitResult);
             }
-            level().getEntities(this, getBoundingBox().inflate(0.5)).forEach(entity -> {
-                entity.hurt(new DamageTypeRegistry(level().registryAccess()).laser(), (float) this.damage);
-            });
+
 
         }
         this.setPos(this.position().add(this.getDeltaMovement()));
