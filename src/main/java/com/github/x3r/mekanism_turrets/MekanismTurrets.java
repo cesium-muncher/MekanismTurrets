@@ -41,7 +41,6 @@ public class MekanismTurrets {
 
         modEventBus.addListener(this::loadConfig);
         MekanismTurretsPacketHandler.registerPackets();
-        forgeBus.addListener(LaserEntity::enterChunk);
 
         registerDataTickets();
     }
