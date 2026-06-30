@@ -9,10 +9,10 @@ import mekanism.common.config.value.CachedIntValue;
 import java.util.function.Supplier;
 
 public enum LaserTurretTier implements ITier {
-    BASIC(BaseTier.BASIC, 80, 1, 10000, 15),
-    ADVANCED(BaseTier.ADVANCED, 65, 2, 40000, 25),
-    ELITE(BaseTier.ELITE, 50, 3, 90000, 35),
-    ULTIMATE(BaseTier.ULTIMATE, 35, 4, 160000, 45);
+    BASIC(BaseTier.BASIC, 50, 2, 2500, 15),
+    ADVANCED(BaseTier.ADVANCED, 25, 5, 125000, 25),
+    ELITE(BaseTier.ELITE, 10, 10, 250000, 50),
+    ULTIMATE(BaseTier.ULTIMATE, 10, 15, 1250000, 100);
 
     private final BaseTier baseTier;
     private final int cooldown;
