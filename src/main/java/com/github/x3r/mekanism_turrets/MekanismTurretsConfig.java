@@ -73,8 +73,8 @@ public class MekanismTurretsConfig {
         eliteLaserTurretRange = BUILDER.comment("Range of the Elite Laser Turret").defineInRange("eliteLaserTurretRange", 50D, 0D, 1000);
         eliteLaserTurretAccuracy = BUILDER.comment("Accuracy of the Ultimate Laser Turret (in max blocks missed per block distance)").defineInRange("eliteLaserTurretAccuracy", 0.02F, 0F, 1F);
 
-        ultimateLaserTurretCooldown = BUILDER.comment("Cooldown of the Ultimate Laser Turret").defineInRange("ultimateLaserTurretCooldown", 10, 0, Integer.MAX_VALUE);
-        ultimateLaserTurretDamage = BUILDER.comment("Damage of the Ultimate Laser Turret").defineInRange("ultimateLaserTurretDamage", 15F, 0F, Integer.MAX_VALUE);
+        ultimateLaserTurretCooldown = BUILDER.comment("Cooldown of the Ultimate Laser Turret").defineInRange("ultimateLaserTurretCooldown", 3, 0, Integer.MAX_VALUE);
+        ultimateLaserTurretDamage = BUILDER.comment("Damage of the Ultimate Laser Turret").defineInRange("ultimateLaserTurretDamage", 5F, 0F, Integer.MAX_VALUE);
         ultimateLaserTurretEnergyCapacity = BUILDER.comment("Energy Capacity of the Ultimate Laser Turret").defineInRange("ultimateLaserTurretEnergyCapacity", 125000, 0, Integer.MAX_VALUE);
         ultimateLaserTurretRange = BUILDER.comment("Range of the Ultimate Laser Turret").defineInRange("ultimateLaserTurretRange", 100D, 0D, 1000);
         ultimateLaserTurretAccuracy = BUILDER.comment("Accuracy of the Ultimate Laser Turret (in max blocks missed per block distance)").defineInRange("ultimateLaserTurretAccuracy", 0.1F, 0F, 1F);
