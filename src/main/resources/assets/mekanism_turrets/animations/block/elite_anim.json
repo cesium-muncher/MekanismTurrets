@@ -2,7 +2,7 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"shoot": {
-			"animation_length": 0.25,
+			"animation_length": 0.5,
 			"bones": {
 				"root": {
 					"position": {
@@ -19,23 +19,38 @@
 						"vector": [0, 0, 0]
 					}
 				},
-				"long_cannon": {
+				"long_cannon2": {
 					"position": {
-						"0.0": {
+						"0.0833": {
 							"vector": [0, 0, 0]
 						},
-						"0.25": {
-							"vector": [0, 0, 1]
+						"0.1667": {
+							"vector": [0, 0, 3],
+							"easing": "linear"
+						},
+						"0.4167": {
+							"vector": [0, 0, 3]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
 						}
 					}
 				},
-				"recharge": {
+				"long_cannon3": {
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"0.25": {
-							"vector": [0, -1, 0]
+						"0.0833": {
+							"vector": [0, 0, 3],
+							"easing": "easeInCubic"
+						},
+						"0.1667": {
+							"vector": [0, 0, 3]
+						},
+						"0.4167": {
+							"vector": [0, 0, 0],
+							"easing": "easeInExpo"
 						}
 					}
 				}
