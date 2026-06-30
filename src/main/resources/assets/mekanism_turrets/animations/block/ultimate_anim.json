@@ -2,7 +2,7 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"shoot": {
-			"animation_length": 0.75,
+			"animation_length": 0.1458,
 			"bones": {
 				"root": {
 					"position": {
@@ -19,48 +19,23 @@
 						"vector": [0, 0, 0]
 					}
 				},
-				"cannon_right": {
-					"position": {
+				"minigun": {
+					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"0.25": {
-							"vector": [0, 0, 0]
+						"0.1042": {
+							"vector": [0, 0, -90]
 						},
-						"0.5": {
-							"vector": [0, 0, 0]
+						"0.125": {
+							"vector": [0, 0, 180],
+							"easing": "step",
+							"easingArgs": [3]
 						},
-						"0.75": {
-							"vector": [0, 0, 1]
-						}
-					}
-				},
-				"cannon_left": {
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.25": {
-							"vector": [0, 0, 1]
-						},
-						"0.5": {
-							"vector": [0, 0, 0]
-						}
-					}
-				},
-				"recharge": {
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.25": {
-							"vector": [0, -1, 0]
-						},
-						"0.5": {
-							"vector": [0, 0, 0]
-						},
-						"0.75": {
-							"vector": [0, -1, 0]
+						"0.1458": {
+							"vector": [0, 0, 0],
+							"easing": "step",
+							"easingArgs": [2]
 						}
 					}
 				}
