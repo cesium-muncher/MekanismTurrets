@@ -172,6 +172,21 @@ public class LaserTurretBlockEntity extends TileEntityMekanism implements GeoBlo
                     if(tier.equals(LaserTurretTier.ULTIMATE)) {
                         Scheduler.schedule(this::shootLaser, coolDown/2);
                     }
+                    int mufflerCount = getComponent().getUpgrades(Upgrade.MUFFLING);
+                    float volume = 1.0F - (mufflerCount / (float) Upgrade.MUFFLING.getMax());
+
+                    if(tier.equals(LaserTurretTier.BASIC)) {
+                        level.playSound(null, getBlockPos(), SoundRegistry.TURRET_BASIC.get(), SoundSource.BLOCKS, volume, 1.0F);
+                    }
+                    if(tier.equals(LaserTurretTier.ADVANCED)) {
+                        level.playSound(null, getBlockPos(), SoundRegistry.TURRET_ADVANCED.get(), SoundSource.BLOCKS, volume, 1.0F);
+                    }
+                    if(tier.equals(LaserTurretTier.ELITE)) {
+                        level.playSound(null, getBlockPos(), SoundRegistry.TURRET_ELITE.get(), SoundSource.BLOCKS, volume, 1.0F);
+                    }
+                    if(tier.equals(LaserTurretTier.ULTIMATE)) {
+                        level.playSound(null, getBlockPos(), SoundRegistry.TURRET_ULTIMATE.get(), SoundSource.BLOCKS, volume, 1.0F);
+                    }
                 }
             } else {
                 coolDown--;
@@ -194,9 +209,6 @@ public class LaserTurretBlockEntity extends TileEntityMekanism implements GeoBlo
 
     private void shootLaser() {
         if(target != null) { // Needed for scheduled shot
-            int mufflerCount = getComponent().getUpgrades(Upgrade.MUFFLING);
-            float volume = 1.0F - (mufflerCount / (float) Upgrade.MUFFLING.getMax());
-            level.playSound(null, getBlockPos(), SoundRegistry.TURRET_SHOOT.get(), SoundSource.BLOCKS, volume, 1.0F);
 
             triggerAnim("controller", "shoot");
 
