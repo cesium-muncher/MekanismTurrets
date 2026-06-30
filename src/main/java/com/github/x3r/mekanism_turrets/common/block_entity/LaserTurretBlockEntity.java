@@ -246,6 +246,9 @@ public class LaserTurretBlockEntity extends TileEntityMekanism implements GeoBlo
             if(optional.isPresent()) {
                 this.target = optional.get();
                 setAnimData(HAS_TARGET, true);
+                int mufflerCount = getComponent().getUpgrades(Upgrade.MUFFLING);
+                float volume = 1.0F - (mufflerCount / (float) Upgrade.MUFFLING.getMax());
+                level.playSound(null, getBlockPos(), SoundRegistry.TURRET_LOCKON.get(), SoundSource.BLOCKS, volume, 1.0F);
             } else {
                 idleTicks = 20 * 4;
             }
