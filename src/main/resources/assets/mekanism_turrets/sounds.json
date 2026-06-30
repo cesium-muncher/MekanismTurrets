@@ -1,5 +1,20 @@
 {
   "turret_shoot": {
     "sounds":["mekanism_turrets:turret_shoot"]
+  },
+  "turret_basic": {
+    "sounds":["mekanism_turrets:turret_basic"]
+  },
+  "turret_advanced": {
+    "sounds":["mekanism_turrets:turret_advanced"]
+  },
+  "turret_elite": {
+    "sounds":["mekanism_turrets:turret_elite"]
+  },
+  "turret_ultimate": {
+    "sounds":["mekanism_turrets:turret_ultimate"]
+  },
+  "turret_lockon": {
+    "sounds":["mekanism_turrets:turret_lockon"]
   }
 }
