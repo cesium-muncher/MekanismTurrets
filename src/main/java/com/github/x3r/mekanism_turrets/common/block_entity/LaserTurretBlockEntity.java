@@ -169,9 +169,7 @@ public class LaserTurretBlockEntity extends TileEntityMekanism implements GeoBlo
                 coolDown = Math.max(2, tier.getCooldown()-(2*upgradeComponent.getUpgrades(Upgrade.SPEED)));
                 if(energyContainer.getEnergy().greaterOrEqual(FloatingLong.create(laserShotEnergy()))) {
                     shootLaser();
-                    if(tier.equals(LaserTurretTier.ULTIMATE)) {
-                        Scheduler.schedule(this::shootLaser, coolDown/2);
-                    }
+
                     int mufflerCount = getComponent().getUpgrades(Upgrade.MUFFLING);
                     float volume = 1.0F - (mufflerCount / (float) Upgrade.MUFFLING.getMax());
 
@@ -214,9 +212,17 @@ public class LaserTurretBlockEntity extends TileEntityMekanism implements GeoBlo
 
             Vec3 center = getBlockPos().getCenter();
             Vec3 targetPos = getShootLocation(target);
+            Float x = (float) (center.x - targetPos.x);
+            Float y = (float) (center.y - targetPos.y);
+            Float z = (float) (center.z - targetPos.z);
+            Float dist = (float) Math.sqrt(x * x + y * y + z * z);
+            Float ox = (float) (Math.random() - 0.5);
+            Float oy = (float) (Math.random() - 0.5);
+            Float oz = (float) (Math.random() - 0.5);
+            Vec3 offset = new Vec3(tier.getAccuracy() * ox, tier.getAccuracy() * oy, tier.getAccuracy() * oz).scale(dist);
 
             LaserEntity laser = new LaserEntity(level, center.add(0, -0.15, 0), tier.getDamage());
-            laser.setDeltaMovement(center.vectorTo(targetPos).normalize().scale(2.25F));
+            laser.setDeltaMovement(center.vectorTo(targetPos.add(offset)).normalize().scale(2.25F));
             level.addFreshEntity(laser);
             energyContainer.extract(FloatingLong.create(laserShotEnergy()), Action.EXECUTE, AutomationType.INTERNAL);
         }
